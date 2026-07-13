@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>You Deserve This Sh!t — Self-Discovery Hub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --green:   #1E3329;
+    --mid:     #2A4A3E;
+    --olive:   #7A9E7E;
+    --taupe:   #C4A882;
+    --cream:   #FAF7F2;
+    --warm:    #F5F0E8;
+    --dark:    #1A1A1A;
+    --muted:   #888;
+    --white:   #fff;
+    --accent:  #8FAF6E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--green);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  .nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    color: var(--white);
+    font-size: 18px;
+    letter-spacing: 0.3px;
+  }
+  .nav-logo span { color: var(--taupe); }
+  .hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-menu {
+    display: none;
+    background: var(--mid);
+    padding: 8px 0 12px;
+  }
+  .nav-menu.open { display: block; }
+  .nav-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #ccc;
+    padding: 10px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-menu button:hover, .nav-menu button.active { color: var(--taupe); }
+  .nav-menu button.active { font-weight: 600; }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green);
+    padding: 48px 20px 40px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: var(--taupe);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero h1 em { color: var(--taupe); font-style: normal; }
+  .hero p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto 28px;
+  }
+  .hero-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 16px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .hero-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px); }
+  .hero-card-icon { font-size: 22px; margin-bottom: 6px; }
+  .hero-card-title { font-size: 12px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+  .hero-card-sub { font-size: 11px; color: #888; }
+
+  /* ── PAGE TITLE ── */
+  .page-title {
+    background: var(--green);
+    padding: 28px 20px 24px;
+  }
+  .page-title .eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--taupe);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .page-title h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .page-title p { color: #999; font-size: 13px; margin-top: 6px; line-height: 1.5; }
+
+  /* ── CONTENT ── */
+  .content { padding: 20px 16px 80px; max-width: 600px; margin: 0 auto; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--taupe);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--green);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .card p { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 14px; }
+
+  textarea {
+    width: 100%;
+    border: 1.5px solid #e0ddd8;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: var(--cream);
+    resize: vertical;
+    min-height: 110px;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  textarea:focus { outline: none; border-color: var(--olive); }
+  textarea::placeholder { color: #bbb; font-style: italic; }
+
+  .save-btn {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+  }
+  .save-btn:hover { background: var(--mid); }
+  .saved-badge {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--olive);
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .saved-badge.show { opacity: 1; }
+
+  /* ── SCALE ── */
+  .scale-wrap { margin: 8px 0 14px; }
+  .scale-label { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .scale-dots {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .scale-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+  .scale-dot.selected {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+  }
+  .scale-dot:hover:not(.selected) { border-color: var(--olive); color: var(--olive); }
+
+  /* ── ENERGY CIRCLE ── */
+  .circle-wrap {
+    position: relative;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle-svg { width: 220px; height: 220px; }
+  .circle-lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .circle-list-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .circle-list-title.inside { color: var(--green); }
+  .circle-list-title.outside { color: #c0392b; }
+  .circle-items { list-style: none; }
+  .circle-item-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .circle-item-row input {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid #e0ddd8;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--dark);
+    padding: 4px 0;
+  }
+  .circle-item-row input:focus { outline: none; border-bottom-color: var(--olive); }
+  .circle-dot-inside { width: 8px; height: 8px; border-radius: 50%; background: var(--olive); flex-shrink: 0; }
+  .circle-dot-outside { width: 8px; height: 8px; border-radius: 50%; background: #e57373; flex-shrink: 0; }
+
+  /* ── TRACKER ── */
+  .weekly-focus-wrap { margin-bottom: 20px; }
+  .weekly-focus-wrap label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--taupe);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .weekly-focus-wrap input {
+    width: 100%;
+    border: 1.5px solid #e0ddd8;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--green);
+    background: var(--cream);
+    transition: border-color 0.2s;
+  }
+  .weekly-focus-wrap input:focus { outline: none; border-color: var(--olive); }
+  .weekly-focus-wrap input::placeholder { color: #ccc; font-style: italic; }
+
+  .days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .day-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .day-name {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--green);
+    margin: -14px -14px 12px;
+    padding: 7px 14px;
+    border-radius: 10px 10px 0 0;
+  }
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .check-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--green);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-row label {
+    font-size: 12px;
+    color: #444;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  .check-row.custom label { color: #999; font-style: italic; }
+  .check-row.custom input[type="text"] {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #e0ddd8;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--dark);
+    padding: 2px 0;
+  }
+  .check-row.custom input[type="text"]:focus { outline: none; border-bottom-color: var(--olive); }
+
+  /* ── 7-DAY CHALLENGE ── */
+  .challenge-day {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .challenge-day.done { opacity: 0.6; }
+  .day-check {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    margin-top: 2px;
+  }
+  .day-check.done { background: var(--green); border-color: var(--green); color: var(--white); }
+  .day-num {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--taupe);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .day-desc { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* ── PURPOSE ── */
+  .four-phases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .phase-card {
+    background: var(--warm);
+    border-radius: 10px;
+    padding: 14px;
+    border-left: 3px solid var(--olive);
+  }
+  .phase-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .phase-desc { font-size: 12px; color: #666; line-height: 1.5; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--green);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: transform 0.3s;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 16px;
+  }
+  .section-divider-line { flex: 1; height: 1px; background: #e0ddd8; }
+  .section-divider-text { font-size: 10px; letter-spacing: 2px; color: var(--taupe); text-transform: uppercase; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-header">
+    <div class="nav-logo">You Deserve This <span>Sh!t</span></div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-menu" id="navMenu">
+    <button onclick="showScreen('home')" id="nav-home">Home</button>
+    <button onclick="showScreen('daily')" id="nav-daily">☀️ Today's Prompt</button>
+    <button onclick="showScreen('journal')" id="nav-journal">📖 My Journal</button>
+    <button onclick="showScreen('awareness')" id="nav-awareness">Awareness</button>
+    <button onclick="showScreen('comfort')" id="nav-comfort">Comfort Zone</button>
+    <button onclick="showScreen('intentional')" id="nav-intentional">Intentional Living</button>
+    <button onclick="showScreen('circle')" id="nav-circle">Energy Circle</button>
+    <button onclick="showScreen('purpose')" id="nav-purpose">Find Your Purpose</button>
+    <button onclick="showScreen('tracker')" id="nav-tracker">Weekly Tracker</button>
+    <button onclick="showScreen('challenge')" id="nav-challenge">7-Day Challenge</button>
+    <button onclick="showScreen('prompts')" id="nav-prompts">📝 100 Journal Prompts</button>
+  </div>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div class="screen active" id="screen-home">
+  <div class="hero">
+    <div class="hero-eyebrow">Feminine Strength Co.</div>
+    <h1>You Deserve<br><em>This Sh!t</em></h1>
+    <p>Your self-discovery hub. Everything saved. Come back anytime.</p>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="showScreen('daily')" style="grid-column: span 2; background: rgba(196,168,130,0.15); border-color: rgba(196,168,130,0.4);">
+        <div class="hero-card-icon">☀️</div>
+        <div class="hero-card-title" style="font-size:14px">Today's Prompt</div>
+        <div class="hero-card-sub" id="home-daily-preview">Tap to see today's journal prompt</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('journal')">
+        <div class="hero-card-icon">📖</div>
+        <div class="hero-card-title">My Journal</div>
+        <div class="hero-card-sub">Past entries</div>
+      </div>
+        <div class="hero-card-icon">🧠</div>
+        <div class="hero-card-title">Awareness</div>
+        <div class="hero-card-sub">Journal prompts</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('comfort')">
+        <div class="hero-card-icon">🔥</div>
+        <div class="hero-card-title">Comfort Zone</div>
+        <div class="hero-card-sub">Face your fears</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('intentional')">
+        <div class="hero-card-icon">🎯</div>
+        <div class="hero-card-title">Intentional Living</div>
+        <div class="hero-card-sub">Your choices</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('circle')">
+        <div class="hero-card-icon">⭕</div>
+        <div class="hero-card-title">Energy Circle</div>
+        <div class="hero-card-sub">Gives vs. takes</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('purpose')">
+        <div class="hero-card-icon">✨</div>
+        <div class="hero-card-title">Find Your Purpose</div>
+        <div class="hero-card-sub">4-phase journal</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('tracker')">
+        <div class="hero-card-icon">📋</div>
+        <div class="hero-card-title">Weekly Tracker</div>
+        <div class="hero-card-sub">Daily habits</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('challenge')" style="grid-column: span 2;">
+        <div class="hero-card-icon">🗓</div>
+        <div class="hero-card-title">7-Day Challenge</div>
+        <div class="hero-card-sub">One action per day to break through</div>
+      </div>
+      <div class="hero-card" onclick="showScreen('prompts')" style="grid-column: span 2;">
+        <div class="hero-card-icon">📝</div>
+        <div class="hero-card-title">100 Journal Prompts</div>
+        <div class="hero-card-sub">Life Purpose · Growth · Passions · Self-Awareness · Authenticity · Relationships · Mindfulness · Gratitude</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AWARENESS ══ -->
+<div class="screen" id="screen-awareness">
+  <div class="page-title">
+    <div class="eyebrow">Section 01</div>
+    <h2>Awareness</h2>
+    <p>Know who you are. Everything starts here.</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="card-label">Prompt 1</div>
+      <h3>Awareness &amp; transformation</h3>
+      <p>Deepak Chopra said the key to transforming your life is to be aware of who you are. How does that make you feel about the role awareness plays in your life — before and after working through this material?</p>
+      <textarea id="awareness-1" placeholder="Write whatever comes up..." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('awareness-1')">Save</button>
+      <span class="saved-badge" id="badge-awareness-1">✓ Saved</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Prompt 2</div>
+      <h3>Three new practices</h3>
+      <p>To increase your awareness, you must invite new practices into your life. What are three new practices or exercises you can do to continue to become more aware of who you are?</p>
+      <textarea id="awareness-2" placeholder="1. &#10;2. &#10;3. " rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('awareness-2')">Save</button>
+      <span class="saved-badge" id="badge-awareness-2">✓ Saved</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Prompt 3</div>
+      <h3>If today were your last day</h3>
+      <p>Would you want to do what you're about to do? If not, why?</p>
+      <textarea id="awareness-3" placeholder="Be honest..." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('awareness-3')">Save</button>
+      <span class="saved-badge" id="badge-awareness-3">✓ Saved</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COMFORT ZONE ══ -->
+<div class="screen" id="screen-comfort">
+  <div class="page-title">
+    <div class="eyebrow">Section 02</div>
+    <h2>Comfort Zone</h2>
+    <p>Courage or comfort. You cannot have both.</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="card-label">Prompt 1</div>
+      <h3>Courage vs. comfort</h3>
+      <p>Brené Brown said, "You can choose courage or you can choose comfort. You cannot have both." How does that make you feel?</p>
+      <textarea id="comfort-1" placeholder="What does this bring up for you..." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('comfort-1')">Save</button>
+      <span class="saved-badge" id="badge-comfort-1">✓ Saved</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Prompt 2</div>
+      <h3>One step toward a fear</h3>
+      <p>Overcoming your fears is the gateway into your power. What's one step you can take today to face a fear?</p>
+      <textarea id="comfort-2" placeholder="Name the fear. Name the step." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('comfort-2')">Save</button>
+      <span class="saved-badge" id="badge-comfort-2">✓ Saved</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Prompt 3</div>
+      <h3>Curiosity outside your safe zone</h3>
+      <p>Curiosity and courage are the keys to life outside your comfort zone. What's something you're curious about exploring outside your safe zone?</p>
+      <textarea id="comfort-3" placeholder="What are you curious about..." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('comfort-3')">Save</button>
+      <span class="saved-badge" id="badge-comfort-3">✓ Saved</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INTENTIONAL LIVING ══ -->
+<div class="screen" id="screen-intentional">
+  <div class="page-title">
+    <div class="eyebrow">Section 03</div>
+    <h2>Intentional Living</h2>
+    <p>Make your choices before others' choices make you.</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="card-label">Prompt 1</div>
+      <h3>An intentional life</h3>
+      <p>John C. Maxwell said, "An unintentional life accepts everything and does nothing. An intentional life embraces only the things that will add to the mission of significance." How does that make you feel?</p>
+      <textarea id="intentional-1" placeholder="What does this stir up..." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('intentional-1')">Save</button>
+      <span class="saved-badge" id="badge-intentional-1">✓ Saved</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Prompt 2</div>
+      <h3>What do you want to accomplish?</h3>
+      <p>Forget about what you <em>can</em> accomplish in life. Instead, ask yourself: What do I <em>want</em> to accomplish in life? Paradigm shift.</p>
+      <textarea id="intentional-2" placeholder="Not what's realistic. What do you want." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('intentional-2')">Save</button>
+      <span class="saved-badge" id="badge-intentional-2">✓ Saved</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Prompt 3</div>
+      <h3>Make more of your own choices</h3>
+      <p>Intentional living is the art of making your own choices before others' choices make you. How can you start to make more of your own choices?</p>
+      <textarea id="intentional-3" placeholder="Be specific — where do you give your choices away..." rows="5"></textarea>
+      <br><button class="save-btn" onclick="save('intentional-3')">Save</button>
+      <span class="saved-badge" id="badge-intentional-3">✓ Saved</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ENERGY CIRCLE ══ -->
+<div class="screen" id="screen-circle">
+  <div class="page-title">
+    <div class="eyebrow">Section 04</div>
+    <h2>Energy Circle</h2>
+    <p>Do more of what fills you. Do less of what drains you.</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <p style="font-size:13px; color:#555; margin-bottom:16px; line-height:1.6;">Inside the circle: everything that brings you joy, fulfills you, and makes you a better person.<br><br>Outside: everything that takes from you.<br><br>Do more of the things on the inside. Do less of the things on the outside.</p>
+      
+      <div class="circle-wrap">
+        <svg class="circle-svg" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="100" fill="rgba(30,51,41,0.04)" stroke="#1E3329" stroke-width="3"/>
+          <text x="110" y="106" text-anchor="middle" font-family="DM Serif Display,serif" font-size="13" fill="#1E3329">inside</text>
+          <text x="110" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7A9E7E">gives me energy</text>
+        </svg>
+      </div>
+
+      <div class="circle-lists">
+        <div>
+          <div class="circle-list-title inside">⬤ Inside — Gives Me Energy</div>
+          <div id="inside-items"></div>
+          <button class="save-btn" style="margin-top:6px; padding:7px 14px; font-size:12px;" onclick="addCircleItem('inside')">+ Add</button>
+        </div>
+        <div>
+          <div class="circle-list-title outside">⬤ Outside — Takes From Me</div>
+          <div id="outside-items"></div>
+          <button class="save-btn" style="margin-top:6px; padding:7px 14px; font-size:12px; background:#c0392b;" onclick="addCircleItem('outside')">+ Add</button>
+        </div>
+      </div>
+      <br>
+      <button class="save-btn" onclick="saveCircle()">Save All</button>
+      <span class="saved-badge" id="badge-circle">✓ Saved</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FIND YOUR PURPOSE ══ -->
+<div class="screen" id="screen-purpose">
+  <div class="page-title">
+    <div class="eyebrow">Section 05</div>
+    <h2>Find Your Purpose</h2>
+    <p>The four phases of finding your reason for being.</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="card-label">Framework</div>
+      <h3>The Four Phases</h3>
+      <div class="four-phases">
+        <div class="phase-card">
+          <div class="phase-title">Self-Exploration</div>
+          <div class="phase-desc">Learn more about yourself and create a deep connection with every edge of your character.</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-title">Core Values</div>
+          <div class="phase-desc">Understand what you value to help you live fully aligned with a successful and meaningful life.</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-title">Self-Limiting Beliefs</div>
+          <div class="phase-desc">Identify and overcome negative self-limiting beliefs that hold you back from the life you desire.</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-title">Life Purpose Statement</div>
+          <div class="phase-desc">Compound everything you learn into a one-sentence life purpose statement.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Prompt 1</div>
+      <h3>How connected are you to your purpose?</h3>
+      <p>On a scale of 1 to 10, how connected do you feel to your purpose right now?</p>
+      <div class="scale-wrap">
+        <div class="scale-label">Tap to select</div>
+        <div class="scale-dots" id="purpose-scale">
+          <div class="scale-dot" onclick="selectScale(1)">1</div>
+          <div class="scale-dot" onclick="selectScale(2)">2</div>
+          <div class="scale-dot" onclick="selectScale(3)">3</div>
+          <div class="scale-dot" onclick="selectScale(4)">4</div>
+          <div class="scale-dot" onclick="selectScale(5)">5</div>
+          <div class="scale-dot" onclick="selectScale(6)">6</div>
+          <div class="scale-dot" onclick="selectScale(7)">7</div>
+          <div class="scale-dot" onclick="selectScale(8)">8</div>
+          <div class="scale-dot" onclick="selectScale(9)">9</div>
+          <div class="scale-dot" onclick="selectScale(10)">10</div>
+        </div>
+      </div>
+      <button class="save-btn" onclick="saveScale()">Save</button>
+      <span class="saved-badge" id="badge-scale">✓ Saved</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Prompt 2</div>
+      <h3>Where are you on your journey?</h3>
+      <p>Do you feel a sense of meaning? Excited or inspired for life? Do you struggle to find joy? Feel stuck or frustrated? How do you honestly feel?</p>
+      <textarea id="purpose-1" placeholder="Be real. No performance here." rows="6"></textarea>
+      <br><button class="save-btn" onclick="save('purpose-1')">Save</button>
+      <span class="saved-badge" id="badge-purpose-1">✓ Saved</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Prompt 3</div>
+      <h3>The dream version of yourself</h3>
+      <p>Explore the dream version of yourself. Write whatever comes to mind and don't hold back.</p>
+      <textarea id="purpose-2" placeholder="Don't filter this one..." rows="6"></textarea>
+      <br><button class="save-btn" onclick="save('purpose-2')">Save</button>
+      <span class="saved-badge" id="badge-purpose-2">✓ Saved</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Prompt 4</div>
+      <h3>What do you value most in life?</h3>
+      <p>Compassion, patience, growth, loyalty... What do you value most and why?</p>
+      <textarea id="purpose-3" placeholder="List your values and write about why each matters..." rows="6"></textarea>
+      <br><button class="save-btn" onclick="save('purpose-3')">Save</button>
+      <span class="saved-badge" id="badge-purpose-3">✓ Saved</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Prompt 5</div>
+      <h3>Self-limiting beliefs</h3>
+      <p>What self-limiting beliefs are holding you back from the life you desire? How did each of these beliefs form?</p>
+      <textarea id="purpose-4" placeholder="Name them. Where did they come from?" rows="6"></textarea>
+      <br><button class="save-btn" onclick="save('purpose-4')">Save</button>
+      <span class="saved-badge" id="badge-purpose-4">✓ Saved</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Prompt 6</div>
+      <h3>How would your life change?</h3>
+      <p>Finding your purpose can free you from feeling lost, confused, stuck, and empty. Write about how your life would change if you didn't feel that way anymore.</p>
+      <textarea id="purpose-5" placeholder="Let yourself imagine it..." rows="6"></textarea>
+      <br><button class="save-btn" onclick="save('purpose-5')">Save</button>
+      <span class="saved-badge" id="badge-purpose-5">✓ Saved</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WEEKLY TRACKER ══ -->
+<div class="screen" id="screen-tracker">
+  <div class="page-title">
+    <div class="eyebrow">Section 06</div>
+    <h2>Weekly Tracker</h2>
+    <p>Weekly focus + daily habits. Resets each week.</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="weekly-focus-wrap">
+        <label>Weekly Focus</label>
+        <input type="text" id="weekly-focus" placeholder="What are you focusing on this week?" oninput="autoSaveTracker()">
+      </div>
+      <div class="section-divider">
+        <div class="section-divider-line"></div>
+        <div class="section-divider-text">Daily Habits</div>
+        <div class="section-divider-line"></div>
+      </div>
+      <p style="font-size:12px; color:#999; margin-bottom:14px;">3 pre-filled + 2 custom per day. Check off as you go.</p>
+      <div class="days-grid" id="tracker-grid"></div>
+      <br>
+      <button class="save-btn" onclick="saveTracker()">Save Week</button>
+      <span class="saved-badge" id="badge-tracker">✓ Saved</span>
+      <br><br>
+      <button onclick="resetTracker()" style="background:none; border:none; color:#bbb; font-size:12px; cursor:pointer; text-decoration:underline;">Start new week (clear all)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 7-DAY CHALLENGE ══ -->
+<div class="screen" id="screen-challenge">
+  <div class="page-title">
+    <div class="eyebrow">Section 07</div>
+    <h2>7-Day Challenge</h2>
+    <p>One action per day. Tap the circle when you've done it.</p>
+  </div>
+  <div class="content" id="challenge-content"></div>
+</div>
+
+<!-- ══ 100 JOURNAL PROMPTS ══ -->
+<div class="screen" id="screen-prompts">
+  <div class="page-title">
+    <div class="eyebrow">100 Prompts</div>
+    <h2>Journal Prompts</h2>
+    <p>Pick a category. Pick a prompt. Write.</p>
+  </div>
+  <div class="content">
+
+    <!-- Category picker -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px" id="cat-picker"></div>
+
+    <!-- Prompt cards injected by JS -->
+    <div id="prompts-container"></div>
+
+  </div>
+</div>
+
+<!-- ══ DAILY PROMPT ══ -->
+<div class="screen" id="screen-daily">
+  <div class="page-title" id="daily-header" style="background:var(--green)">
+    <div class="eyebrow" id="daily-date-label">Today</div>
+    <h2 id="daily-category-label">Your Daily Prompt</h2>
+    <p id="daily-progress-label">Loading...</p>
+  </div>
+  <div class="content">
+    <div class="card" id="daily-prompt-card" style="border-left: 4px solid var(--taupe);">
+      <div class="card-label" id="daily-cat-label">Category</div>
+      <p id="daily-prompt-text" style="font-family:'DM Serif Display',serif; font-size:18px; color:var(--green); line-height:1.6; margin-bottom:16px; font-weight:400;"></p>
+      <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Your response</label>
+      <textarea id="daily-response" placeholder="Write it here... or use this as your journal prompt and write in your notebook." rows="7"></textarea>
+      <br>
+      <button class="save-btn" onclick="saveDailyResponse()" style="margin-top:10px">Save Response</button>
+      <span class="saved-badge" id="badge-daily">✓ Saved</span>
+      <br><br>
+      <button onclick="skipToNextPrompt()" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;padding:0">Skip to tomorrow's prompt →</button>
+    </div>
+
+    <div class="card" style="background:var(--warm); box-shadow:none;">
+      <div class="card-label">How to use this</div>
+      <p style="font-size:13px;color:#555;line-height:1.7">A new prompt appears every day. You can write your answer here and it saves, or just read it and write in your physical journal — whatever you'll actually do. Your past entries are in <strong>My Journal</strong>. Every one of the 100 prompts will come up before any repeat.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JOURNAL LOG ══ -->
+<div class="screen" id="screen-journal">
+  <div class="page-title">
+    <div class="eyebrow">Your Entries</div>
+    <h2>My Journal</h2>
+    <p>Every response you've saved, in order.</p>
+  </div>
+  <div class="content">
+    <div id="journal-log-container"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Saved ✓</div>
+
+<script>
+// ── DAILY PROMPT ENGINE ──
+const ALL_PROMPTS = [];
+// Flatten all 100 prompts with category info — populated after PROMPT_CATEGORIES is defined
+function initDailyEngine() {
+  PROMPT_CATEGORIES.forEach(cat => {
+    cat.prompts.forEach((prompt, i) => {
+      ALL_PROMPTS.push({ cat: cat.label, catId: cat.id, color: cat.color, prompt, key: `prompt-${cat.id}-${i}` });
+    });
+  });
+}
+
+function getTodayKey() {
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
+function getPromptIndex() {
+  // Use date-based seed so same prompt all day, advances daily, cycles through 100
+  const order = ls('ydts-prompt-order') || shuffleOrder();
+  const startDate = ls('ydts-prompt-start') || getTodayKey();
+  if (!ls('ydts-prompt-start')) ls('ydts-prompt-start', startDate);
+  const daysSinceStart = Math.floor((new Date(getTodayKey()) - new Date(startDate)) / 86400000);
+  return { order, idx: daysSinceStart % 100 };
+}
+
+function shuffleOrder() {
+  const arr = Array.from({length: 100}, (_, i) => i);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  ls('ydts-prompt-order', arr);
+  ls('ydts-prompt-start', getTodayKey());
+  return arr;
+}
+
+function getTodayPrompt() {
+  const { order, idx } = getPromptIndex();
+  return { ...ALL_PROMPTS[order[idx]], idx };
+}
+
+function buildDailyScreen() {
+  const p = getTodayPrompt();
+  const today = getTodayKey();
+  const dateLabel = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+  document.getElementById('daily-date-label').textContent = dateLabel;
+  document.getElementById('daily-category-label').textContent = p.cat.replace(/^\S+\s/, ''); // strip emoji
+  document.getElementById('daily-progress-label').textContent = `Prompt ${p.idx + 1} of 100 — ${p.cat}`;
+  document.getElementById('daily-cat-label').textContent = p.cat;
+  document.getElementById('daily-prompt-text').textContent = p.prompt;
+
+  // Load saved response for today
+  const saved = ls('ydts-daily-' + today) || {};
+  document.getElementById('daily-response').value = saved.response || '';
+
+  // Update home preview
+  const preview = document.getElementById('home-daily-preview');
+  if (preview) preview.textContent = p.prompt.length > 60 ? p.prompt.slice(0, 60) + '…' : p.prompt;
+}
+
+function saveDailyResponse() {
+  const today = getTodayKey();
+  const p = getTodayPrompt();
+  const response = document.getElementById('daily-response').value;
+  const entry = { date: today, cat: p.cat, prompt: p.prompt, response, idx: p.idx };
+  ls('ydts-daily-' + today, entry);
+
+  // Add to journal log
+  const log = ls('ydts-journal-log') || [];
+  const existing = log.findIndex(e => e.date === today);
+  if (existing >= 0) log[existing] = entry;
+  else log.unshift(entry); // newest first
+  ls('ydts-journal-log', log);
+
+  showBadge('badge-daily');
+  showToast();
+}
+
+function skipToNextPrompt() {
+  // Manually advance the start date by 1 so tomorrow's prompt shows now
+  const start = ls('ydts-prompt-start') || getTodayKey();
+  const prev = new Date(start);
+  prev.setDate(prev.getDate() - 1);
+  ls('ydts-prompt-start', prev.toISOString().slice(0, 10));
+  document.getElementById('daily-response').value = '';
+  buildDailyScreen();
+}
+
+// ── JOURNAL LOG ──
+function buildJournalLog() {
+  const container = document.getElementById('journal-log-container');
+  if (!container) return;
+  const log = ls('ydts-journal-log') || [];
+  if (!log.length) {
+    container.innerHTML = '<div class="card"><p style="color:#999;font-size:13px;text-align:center;padding:20px 0">No entries yet. Start with today\'s prompt.</p></div>';
+    return;
+  }
+  container.innerHTML = '';
+  log.forEach(entry => {
+    const dateStr = new Date(entry.date + 'T12:00:00').toLocaleDateString('en-US', { weekday:'short', month:'long', day:'numeric', year:'numeric' });
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style = 'margin-bottom:14px';
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <div class="card-label" style="color:#888">${dateStr}</div>
+        <div style="font-size:10px;color:var(--taupe);font-weight:600">${entry.cat || ''}</div>
+      </div>
+      <p style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;line-height:1.5">${entry.prompt}</p>
+      ${entry.response ? `<p style="font-size:13px;color:#444;line-height:1.7;white-space:pre-line;border-top:1px solid #eee;padding-top:10px;margin-top:4px">${entry.response}</p>` : '<p style="font-size:12px;color:#bbb;font-style:italic">No written response saved.</p>'}
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ── 100 PROMPTS DATA ──
+const PROMPT_CATEGORIES = [
+  {
+    id: 'life-purpose', label: '🌟 Life Purpose', color: '#1E3329',
+    prompts: [
+      'When I was a child, I loved to...',
+      'What gets me excited to wake up in the morning?',
+      'When I think of the impact I want to make, I think about doing...',
+      'What is most important to me in my life?',
+      'When do I feel most alive?',
+      'Make a list of things that bring you joy.',
+      'What do I want to be remembered for?',
+      'How can I make the world a better place?',
+      'Make a list of things that energize you.',
+      'What brings me fulfillment in life?'
+    ]
+  },
+  {
+    id: 'personal-growth', label: '📈 Personal Growth', color: '#2A4A3E',
+    prompts: [
+      "What's one action I can take today to make me 1% better than yesterday?",
+      'Make a list of areas you want to improve on in life.',
+      'Albert Einstein once said, "Strive not to be a success, but rather to be of value." What can you do to be of value?',
+      'How can I make my personal growth more of a priority?',
+      'Who do I want to be in five years? Include as much detail as possible.',
+      'What do I need to let go of and why?',
+      'Write down three things that make you feel valuable. How can you incorporate those into your life more often?',
+      'Who is someone I need to let go of and why?',
+      'What positive changes have I made this year?',
+      'How can I feel more fulfilled every day?'
+    ]
+  },
+  {
+    id: 'passions', label: '🔥 Discovering Passions', color: '#3D6B59',
+    prompts: [
+      'What hobby or skill makes me excited?',
+      "What's one thing I enjoy doing that makes me lose track of time?",
+      'If money was not a concern, what would I do with my life?',
+      "What's one topic I can talk about endlessly?",
+      'When I think of doing something that makes me fulfilled, what comes to mind?',
+      'If you were guaranteed success, what would you chase?',
+      "What's your most favorite way to spend your time?",
+      'Whose life inspires you most and why?',
+      'When I feel most alive, I am doing...',
+      'My life is most ideal when...'
+    ]
+  },
+  {
+    id: 'self-awareness', label: '🧠 Self-Awareness', color: '#1E3329',
+    prompts: [
+      'To increase your awareness, you must invite new practices into your life. What are three new practices or exercises you can do to continue to become more aware of who you are?',
+      'I feel most happy when...',
+      'What type of situations trigger me, and how can I deal with them better in the future?',
+      'When I am processing tough emotions, it\'s best for me to...',
+      "If today were your last day, would you want to do what you're about to do? If not, why?",
+      'How do I respond to challenges? Is there a better approach for me to take?',
+      'What am I insecure about? How can I learn from my insecurities?',
+      'Deepak Chopra said, "I think the key to transforming your life is to be aware of who you are." How does that make you feel about the role self-awareness plays in your life?',
+      'When do I feel my best? What am I doing?',
+      'What is working well in my life today?'
+    ]
+  },
+  {
+    id: 'authentic', label: '✨ Authentic Self', color: '#2A4A3E',
+    prompts: [
+      'Spend five to 15 minutes writing about the dream version of yourself. Who do they surround themselves with? How do they spend their weekends? What are their favorite hobbies? What do they do for a living? Do they like to travel, or are they homebodies?',
+      'What are my core values? Am I living in alignment with them?',
+      'What fears hold me back from living as my most authentic self?',
+      'What (or who) would I need to get rid of to live as my most authentic version?',
+      'Write a list of everything that brings you joy. Then, challenge yourself to do one thing from your list every day this week.',
+      "Where in life do I feel like I'm not living as my most authentic self?",
+      "What's my ideal version? How are they different than who I'm living as now?",
+      'List five core values that help me live authentically.',
+      'What are you afraid would happen if you share your most authentic self with the world?',
+      "How would I feel if I didn't live as my most authentic version?"
+    ]
+  },
+  {
+    id: 'relationships', label: '💛 Relationships', color: '#3D6B59',
+    prompts: [
+      '"You\'re the average of the five people you spend the most time with." Do the people you spend the most time with have qualities and characteristics you wish to portray?',
+      'Think about a relationship that is near and dear to your heart. What is going well, and what can you improve?',
+      'What type of person do I want to show up as for my friends and family?',
+      'What do you value most in a friend?',
+      'When I think of my closest relationships, I feel...',
+      'Who do I trust most and why?',
+      'What do you value most in a life partner?',
+      'How can you better support your friends and family?',
+      'What qualities do you bring to a relationship?',
+      'What three important lessons have you learned from past relationships?'
+    ]
+  },
+  {
+    id: 'mindfulness', label: '🌿 Mindfulness', color: '#1E3329',
+    prompts: [
+      'What are three moments that made me smile today?',
+      'List three challenges you faced and how you overcame each one.',
+      'What are you looking forward to today?',
+      'What, if anything, went wrong today, and how can I improve on it tomorrow?',
+      'List three events that made you feel loved today.',
+      'What are three thoughts that made you smile today?',
+      'How often do I procrastinate? How can I take action more easily?',
+      'How do I have an impact on my surrounding community?',
+      'What did I do during my morning routine, and what was my favorite part?',
+      'Explain, in detail, your ideal day.'
+    ]
+  },
+  {
+    id: 'gratitude', label: '🙏 Gratitude', color: '#2A4A3E',
+    prompts: [
+      'Today, I am grateful for: something that happened yesterday / something today / one thing I\'m looking forward to / someone from my childhood / one seemingly insignificant item right in front of me.',
+      'Gratitude can serve as a flashlight that illuminates the most authentic version of yourself. The more you practice being grateful, the brighter your flashlight will shine. How does this make you feel?',
+      'What recent accomplishment are you proud of?',
+      'When you think of your closest relationships, who are you grateful for and why?',
+      'What past experiences are you grateful for?',
+      'How has practicing gratitude improved the quality of your life?',
+      'What mistake or failure are you grateful for? What did it teach you?',
+      "What's a memory from the last year that you're grateful for? Why?",
+      'How can you become more grateful every day?',
+      "What's something that you're grateful to have today that you didn't have a year ago?"
+    ]
+  }
+];
+
+let activeCategory = 'life-purpose';
+
+function buildCategoryPicker() {
+  const el = document.getElementById('cat-picker');
+  if (!el) return;
+  el.innerHTML = '';
+  PROMPT_CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'save-btn';
+    btn.style = `background:${cat.id === activeCategory ? cat.color : '#ddd'}; color:${cat.id === activeCategory ? '#fff' : '#555'}; padding:7px 12px; font-size:12px; border-radius:20px; border:none; cursor:pointer; transition:all .2s;`;
+    btn.textContent = cat.label;
+    btn.onclick = () => { activeCategory = cat.id; buildCategoryPicker(); buildPrompts(); };
+    el.appendChild(btn);
+  });
+}
+
+function buildPrompts() {
+  const container = document.getElementById('prompts-container');
+  if (!container) return;
+  const cat = PROMPT_CATEGORIES.find(c => c.id === activeCategory);
+  if (!cat) return;
+  container.innerHTML = '';
+  cat.prompts.forEach((prompt, i) => {
+    const key = `prompt-${cat.id}-${i}`;
+    const saved = ls('ydts-' + key) || '';
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-label" style="color:${cat.color}">${cat.label} — Prompt ${i + 1}</div>
+      <p style="font-size:14px;font-weight:600;color:#1A1A1A;margin-bottom:10px;line-height:1.5">${prompt}</p>
+      <textarea id="${key}" placeholder="Write whatever comes..." rows="4">${saved}</textarea>
+      <br><button class="save-btn" style="background:${cat.color}" onclick="savePrompt('${key}')">Save</button>
+      <span class="saved-badge" id="badge-${key}">✓ Saved</span>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function savePrompt(id) {
+  const val = document.getElementById(id).value;
+  ls('ydts-' + id, val);
+  showBadge('badge-' + id);
+  showToast();
+}
+
+// ── STORAGE ──
+function ls(key, val) {
+  if (val !== undefined) { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} }
+  else { try { return JSON.parse(localStorage.getItem(key)); } catch(e){ return null; } }
+}
+
+// ── NAV ──
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('navMenu').classList.toggle('open', menuOpen);
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  document.querySelectorAll('.nav-menu button').forEach(b => b.classList.remove('active'));
+  document.getElementById('nav-' + id).classList.add('active');
+  menuOpen = false;
+  document.getElementById('navMenu').classList.remove('open');
+  window.scrollTo(0, 0);
+  if (id === 'journal') buildJournalLog();
+  if (id === 'daily') buildDailyScreen();
+}
+
+// ── SAVE / LOAD TEXT ──
+function save(id) {
+  const val = document.getElementById(id).value;
+  ls('ydts-' + id, val);
+  showBadge('badge-' + id);
+  showToast();
+}
+function showBadge(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2000);
+}
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+function loadText(id) {
+  const val = ls('ydts-' + id);
+  if (val) document.getElementById(id).value = val;
+}
+
+// ── ENERGY CIRCLE ──
+function addCircleItem(side) {
+  const container = document.getElementById(side + '-items');
+  const idx = container.children.length;
+  const saved = ls('ydts-circle-' + side) || [];
+  const row = document.createElement('div');
+  row.className = 'circle-item-row';
+  row.innerHTML = `<div class="circle-dot-${side}"></div><input type="text" placeholder="Add something..." value="${saved[idx] || ''}" oninput="autoSaveCircle()">`;
+  container.appendChild(row);
+}
+function autoSaveCircle() { saveCircle(true); }
+function saveCircle(silent) {
+  ['inside','outside'].forEach(side => {
+    const inputs = document.querySelectorAll('#' + side + '-items input');
+    const vals = Array.from(inputs).map(i => i.value);
+    ls('ydts-circle-' + side, vals);
+  });
+  if (!silent) { showBadge('badge-circle'); showToast(); }
+}
+function loadCircle() {
+  ['inside','outside'].forEach(side => {
+    const vals = ls('ydts-circle-' + side) || [];
+    vals.forEach(() => addCircleItem(side));
+    setTimeout(() => {
+      const inputs = document.querySelectorAll('#' + side + '-items input');
+      vals.forEach((v,i) => { if (inputs[i]) inputs[i].value = v; });
+    }, 50);
+  });
+  if (!(ls('ydts-circle-inside') && ls('ydts-circle-inside').length)) {
+    for(let i=0;i<3;i++) { addCircleItem('inside'); addCircleItem('outside'); }
+  }
+}
+
+// ── PURPOSE SCALE ──
+let selectedScale = ls('ydts-scale') || null;
+function selectScale(n) {
+  selectedScale = n;
+  document.querySelectorAll('.scale-dot').forEach((d, i) => {
+    d.classList.toggle('selected', i + 1 === n);
+  });
+}
+function saveScale() {
+  if (selectedScale) { ls('ydts-scale', selectedScale); showBadge('badge-scale'); showToast(); }
+}
+function loadScale() {
+  const v = ls('ydts-scale');
+  if (v) selectScale(v);
+}
+
+// ── TRACKER ──
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const PRESET = ['Started the day with gratitude journaling', 'Created space for "me time"', 'Practiced any type of meditation'];
+
+function buildTracker() {
+  const grid = document.getElementById('tracker-grid');
+  grid.innerHTML = '';
+  const data = ls('ydts-tracker') || {};
+  DAYS.forEach(day => {
+    const d = data[day] || {};
+    const card = document.createElement('div');
+    card.className = 'day-card';
+    card.innerHTML = `<div class="day-name">${day}</div>`;
+    PRESET.forEach((label, i) => {
+      const row = document.createElement('div');
+      row.className = 'check-row';
+      const checked = d['preset-'+i] ? 'checked' : '';
+      row.innerHTML = `<input type="checkbox" id="${day}-p${i}" ${checked} onchange="autoSaveTracker()"><label for="${day}-p${i}">${label}</label>`;
+      card.appendChild(row);
+    });
+    for (let c = 0; c < 2; c++) {
+      const row = document.createElement('div');
+      row.className = 'check-row custom';
+      const checked = d['custom-check-'+c] ? 'checked' : '';
+      const text = d['custom-text-'+c] || '';
+      row.innerHTML = `<input type="checkbox" id="${day}-c${c}" ${checked} onchange="autoSaveTracker()"><input type="text" placeholder="Add your own..." value="${text}" oninput="autoSaveTracker()">`;
+      card.appendChild(row);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function autoSaveTracker() { saveTracker(true); }
+function saveTracker(silent) {
+  const focus = document.getElementById('weekly-focus').value;
+  ls('ydts-weekly-focus', focus);
+  const data = {};
+  DAYS.forEach(day => {
+    data[day] = {};
+    PRESET.forEach((_, i) => {
+      const el = document.getElementById(day + '-p' + i);
+      if (el) data[day]['preset-'+i] = el.checked;
+    });
+    for (let c = 0; c < 2; c++) {
+      const cb = document.getElementById(day + '-c' + c);
+      const tb = document.querySelector(`#screen-tracker [id="${day}-c${c}"] ~ input[type="text"]`);
+      // get custom text differently
+      const dayCards = document.querySelectorAll('.day-card');
+      dayCards.forEach(card => {
+        if (card.querySelector('.day-name').textContent === day) {
+          const customs = card.querySelectorAll('.check-row.custom');
+          if (customs[c]) {
+            data[day]['custom-check-'+c] = customs[c].querySelector('input[type="checkbox"]').checked;
+            data[day]['custom-text-'+c] = customs[c].querySelector('input[type="text"]').value;
+          }
+        }
+      });
+    }
+  });
+  ls('ydts-tracker', data);
+  if (!silent) { showBadge('badge-tracker'); showToast(); }
+}
+function resetTracker() {
+  if (confirm('Start a new week? This will clear all checkboxes and your weekly focus.')) {
+    ls('ydts-tracker', {});
+    ls('ydts-weekly-focus', '');
+    document.getElementById('weekly-focus').value = '';
+    buildTracker();
+  }
+}
+function loadTracker() {
+  const focus = ls('ydts-weekly-focus');
+  if (focus) document.getElementById('weekly-focus').value = focus;
+  buildTracker();
+}
+
+// ── 7-DAY CHALLENGE ──
+const CHALLENGE_DAYS = [
+  { day: 'Day One', desc: "What is one thing you've been wanting to try but you've been putting off? Do that thing today, or this week." },
+  { day: 'Day Two', desc: "Your network is your net worth. Step outside your comfort zone today and strengthen a relationship or introduce yourself to someone new." },
+  { day: 'Day Three', desc: '"Me time" is crucial. Dedicate at least 30 minutes to yourself today — whether that\'s doing something for pure joy or focusing on your personal growth.' },
+  { day: 'Day Four', desc: "If kindness was currency, how wealthy would you be? Challenge yourself to 3 random acts of kindness today." },
+  { day: 'Day Five', desc: "The outdoors has played a huge role in helping get unstuck and feel rejuvenated. Motivate yourself to spend at least 30 minutes outside today. Don't be surprised when it becomes something you do every day." },
+  { day: 'Day Six', desc: "Creating space from a goal we are working toward can often help us get motivated. Take a break today. You deserve it." },
+  { day: 'Day Seven', desc: "Morning routines can take you a long way. Come up with a simple 3-step morning routine you can use in your next week." }
+];
+
+function buildChallenge() {
+  const content = document.getElementById('challenge-content');
+  const done = ls('ydts-challenge') || {};
+  content.innerHTML = '';
+  CHALLENGE_DAYS.forEach((item, i) => {
+    const isDone = done[i] || false;
+    const el = document.createElement('div');
+    el.className = 'challenge-day' + (isDone ? ' done' : '');
+    el.id = 'challenge-day-' + i;
+    el.innerHTML = `
+      <div class="day-check ${isDone ? 'done' : ''}" onclick="toggleChallenge(${i})">${isDone ? '✓' : ''}</div>
+      <div>
+        <div class="day-num">${item.day}</div>
+        <div class="day-desc">${item.desc}</div>
+      </div>`;
+    content.appendChild(el);
+  });
+}
+function toggleChallenge(i) {
+  const done = ls('ydts-challenge') || {};
+  done[i] = !done[i];
+  ls('ydts-challenge', done);
+  buildChallenge();
+  showToast();
+}
+
+// ── INIT ──
+const TEXT_IDS = ['awareness-1','awareness-2','awareness-3','comfort-1','comfort-2','comfort-3','intentional-1','intentional-2','intentional-3','purpose-1','purpose-2','purpose-3','purpose-4','purpose-5'];
+
+window.addEventListener('load', () => {
+  TEXT_IDS.forEach(loadText);
+  loadCircle();
+  loadScale();
+  loadTracker();
+  buildChallenge();
+  buildCategoryPicker();
+  buildPrompts();
+  initDailyEngine();
+  buildDailyScreen();
+  buildJournalLog();
+});
+</script>
+</body>
+</html>
