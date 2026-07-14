@@ -938,17 +938,22 @@ function shuffleOrder() {
 }
 
 function getTodayPrompt() {
+  if (ALL_PROMPTS.length === 0) initDailyEngine();
   const { order, idx } = getPromptIndex();
-  return { ...ALL_PROMPTS[order[idx]], idx };
+  const promptData = ALL_PROMPTS[order[idx]];
+  if (!promptData) return { cat: '🌟 Life Purpose', catId: 'life-purpose', color: '#1E3329', prompt: ALL_PROMPTS[0].prompt, idx: 0 };
+  return { ...promptData, idx };
 }
 
 function buildDailyScreen() {
+  if (ALL_PROMPTS.length === 0) initDailyEngine();
   const p = getTodayPrompt();
+  if (!p || !p.prompt) return;
   const today = getTodayKey();
   const dateLabel = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
 
   document.getElementById('daily-date-label').textContent = dateLabel;
-  document.getElementById('daily-category-label').textContent = p.cat.replace(/^\S+\s/, ''); // strip emoji
+  document.getElementById('daily-category-label').textContent = p.cat.replace(/^\S+\s/, '');
   document.getElementById('daily-progress-label').textContent = `Prompt ${p.idx + 1} of 100 — ${p.cat}`;
   document.getElementById('daily-cat-label').textContent = p.cat;
   document.getElementById('daily-prompt-text').textContent = p.prompt;
@@ -1404,11 +1409,11 @@ window.addEventListener('load', () => {
   loadScale();
   loadTracker();
   buildChallenge();
-  buildCategoryPicker();
-  buildPrompts();
   initDailyEngine();
   buildDailyScreen();
   buildJournalLog();
+  buildCategoryPicker();
+  buildPrompts();
 });
 </script>
 </body>
